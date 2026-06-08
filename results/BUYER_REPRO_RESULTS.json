@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "date": "2026-06-07T17:30:49.284Z",
+    "public_sources": [
+      "OR-Bench",
+      "StrongREJECT",
+      "hackerprompt",
+      "jailbreakhub"
+    ],
+    "n_inj_adv": 176,
+    "n_con_adv": 100,
+    "n_safe": 150,
+    "note": "Two-number design: injection and content reported SEPARATELY. STENO/SIRENE removed (measured non-functional)."
+  },
+  "stage1_injection": {
+    "n_adversarial": 176,
+    "n_safe": 150,
+    "injection_tpr_pct": 76.7,
+    "benign_fpr_pct": 4,
+    "latency_p50_ms": 2.47,
+    "latency_p95_ms": 1124.52,
+    "sources": "hackerprompt+jailbreakhub vs OR-Bench"
+  },
+  "stage2_content": {
+    "n_adversarial": 100,
+    "n_safe": 150,
+    "tpr_pct": 79,
+    "fpr_pct": 10,
+    "f1": 0.814,
+    "model": "llama-guard3:1b (sovereign on-prem CPU/NPU, no cloud)",
+    "sources": "StrongREJECT+OR-Bench-toxic vs OR-Bench"
+  },
+  "stage3_poaw": {
+    "algorithm": "ML-DSA-65 (FIPS 204)",
+    "authority_fpr": "f5ab76b75e9b5e9b",
+    "receipt": {
+      "proofId": "3a4f2909cfb061e39d81f68c8004cdc0e135da52be8f23fb053d572eebb3ada6",
+      "merkleRoot": "0a7abf9cf6d03cab41d1b684013e8b3e73a4356efba504c6eed3a812ff14d3d6",
+      "actions": 3
+    },
+    "verify_untampered": {
+      "merkle": true,
+      "integrity": true,
+      "pqc_sig": true,
+      "verdict": "VALID"
+    },
+    "tamper_tests": {
+      "action_replay": {
+        "caught": true,
+        "description": "swap leaf hash (action replay)"
+      },
+      "metric_inflate": {
+        "caught": true,
+        "description": "inflate fpr 4%→0.1%, rehash, try to reuse sig"
+      }
+    },
+    "honest_status": {
+      "hash_chain": "REAL (SHA-256 Fibonacci-Merkle)",
+      "pqc_signing": "REAL (ML-DSA-65 (FIPS 204))",
+      "hsm_bridge": "STUB — TODO: wire AWS Nitro Enclave",
+      "w3c_vc_adapter": "Implemented in NestJS service (not exercised in this standalone test)"
+    }
+  }
+}

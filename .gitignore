@@ -1,0 +1,19 @@
+# Node
+node_modules/
+*.log
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local data caches (download from public sources per DATA.md)
+mega-corpus/
+*.parquet
+*.jsonl.gz
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,13 @@
+{
+  "injTPR": 47.633136094674555,
+  "benignFPR": 3.8,
+  "n_inj": 676,
+  "n_safe": 1500,
+  "secs": 364.521,
+  "srcTpr": {
+    "hackerprompt_adversarial": "72.0% (n=200)",
+    "jailbreakhub_adversarial": "85.5% (n=76)",
+    "wildjailbreak_adversarial": "16.0% (n=200)",
+    "pliny_real_adversarial": "40.5% (n=200)"
+  }
+}
