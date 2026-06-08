@@ -34,10 +34,10 @@ Output: console summary **and** `BUYER_REPRO_RESULTS.json` (every metric, machin
 ## What's NOT included (and why)
 | Component | Status | Note |
 |---|---|---|
-| STENO compression | ⚠️ tested separately (not in *this* harness) | This injection harness fed STENO short adversarial prompts → ~0% (wrong corpus). STENO targets **verbose LLM output**: **19% avg / 34% peak / 100% lossless / 906 KB/s** on 10K LLM-style samples (`shared/steno/benchmark-steno.ts`). Real TRL8 engine; live-path wiring in progress. |
+| STENO compression | ❌ removed | "19–34% lossless" was a salted-corpus artifact (dictionary built from its own 5 templates; honest number on real text ≈0.01%). No compression claim is made here. |
 | SIRENE feedback | ❌ removed | Measured **φ-coherence = 0.50** (golden-ratio numerology, non-functional scoring). |
 
-*Wheeler reality-mode: measure each component on the corpus it's actually designed for. STENO's earlier "0%" was a corpus mismatch, not a dead engine — corrected 2026-06-08.*
+*Wheeler reality-mode: only ship numbers that reproduce on neutral public data. STENO and SIRENE were retired because they don't. The two-number scorecard (injection + content) and POAW audit are what survives.*
 
 ## Honest scope
 - ✅ Reproduces injection TPR/FPR on public datasets (buyer reruns, same result)

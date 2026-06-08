@@ -18,7 +18,6 @@
 | **Injection** | latency p50 | **~2ms** | CPU, no GPU |
 | **Content safety** | F1 | **~0.81** | StrongREJECT / OR-Bench, Llama-Guard-3:1b on-prem |
 | **POAW audit** | verdict | **VALID + tamper CAUGHT** | SHA-256 Merkle + ML-DSA-65 (FIPS 204) |
-| **STENO compression** | token reduction | **19% avg / 34% peak, 100% lossless** | 10K LLM-style samples |
 
 ## ⚠️ The honest gap (read this — it's the point)
 
@@ -80,11 +79,11 @@ python scorer/ga_scorer.py <stellschrauben.json> --split dataset_split_manifest.
 - **content F1** — harmonic mean of Llama-Guard precision+recall (sovereign, on-prem, no cloud).
 - **POAW verdict** — `VALID` + both tamper tests `CAUGHT` proves the audit chain detects forgery.
 
-## ⚠️ STENO measurement note (important)
-STENO compresses **verbose LLM output** (filler phrases like "it is important to note that").
-If you run it against short adversarial injection prompts you will measure ~0% — that is the
-*wrong corpus*, not a broken engine. Always benchmark STENO on LLM-style text. Verified:
-19% avg / 34% peak / 100% lossless / 906 KB/s on N=10,000 (`shared/steno/benchmark-steno.ts`).
+## Token compression — deliberately NOT claimed
+This benchmark makes **no token-compression claim**. An earlier internal "STENO 19–34%" figure
+was a salted-corpus artifact (the benchmark dictionary was built from its own 5 templates; the
+honest number on real text is ≈0.01%) and has been retired. Real compute-cost levers are standard
+prompt-caching + model-tiering at the gateway. We'd rather ship nothing than a number you can't reproduce.
 
 ## Data provenance (inspect every prompt)
 - **Injection adversarial:** hackerprompt + jailbreakhub (`mega-corpus/`)
