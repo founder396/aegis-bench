@@ -14,14 +14,16 @@
 
 | Stage | Metric | Result | Corpus |
 |---|---|---|---|
-| **Injection** | TPR / FPR | **97.7% / 4.0%** | hackerprompt + jailbreakhub vs OR-Bench |
+| **Injection** | TPR / FPR | **withdrawn — re-measurement pending** | see note below |
 | **Injection** | latency p50 | **~2ms** | CPU, no GPU |
 | **Content safety** | F1 | **~0.81** | StrongREJECT / OR-Bench, Llama-Guard-3:1b on-prem |
 | **POAW audit** | verdict | **VALID + tamper CAUGHT** | SHA-256 Merkle + ML-DSA-65 (FIPS 204) |
 
 ## ⚠️ The honest gap (read this — it's the point)
 
-We catch **standard prompt-injection at 97.7%**. We catch **sophisticated narrative / roleplay
+**The previously published injection figure (97.7% / 4.0%) is withdrawn.** It did not reproduce on
+independent public data, and the last run in `results/` already disagreed with it. No injection rate
+is claimed until a reproducible re-measurement is published. We catch **sophisticated narrative / roleplay
 jailbreaks** (wildjailbreak corpus) at only **~37% at the system level** (full cascade + PMB +
 Llama-Guard content layer — and the content layer barely helps, because these are roleplay/framing
 attacks, not overtly harmful content). We disclose this because:
@@ -61,7 +63,7 @@ ollama pull llama-guard3:1b
 
 # Stage 1+2+3 — the full buyer scorecard (against the DESTILL gateway):
 npx tsx harness/buyer_repro_vertical_test.ts --inj 200 --con 100 --safe 150
-#   → injection_tpr ≈ 97.7%, benign_fpr ≈ 4.0%, content F1 ≈ 0.81,
+#   → injection_tpr, benign_fpr, content F1 ≈ 0.81,
 #     POAW VALID + both tamper attacks CAUGHT
 #   → writes results/BUYER_REPRO_RESULTS.json (every metric, machine-readable)
 
